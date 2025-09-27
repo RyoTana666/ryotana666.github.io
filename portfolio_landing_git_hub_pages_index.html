@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ryo Tanaka – Links / Portfolio</title>
+    <meta name="description" content="田中 良（Ryo Tanaka）のポートフォリオ。清邁米粉湯・台日混混・個人SNSへの公式リンク集。" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ryo Tanaka – Links / Portfolio" />
+    <meta property="og:description" content="清邁米粉湯・台日混混・個人アカウントへの公式リンク。" />
+    <meta property="og:image" content="./og-image.jpg" />
+    <meta property="og:url" content="https://your-domain-or-username.github.io/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Tailwind via CDN (軽量開発用) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#16a34a',
+                dark: '#15803d'
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Favicon (差し替え推奨) -->
+    <link rel="icon" href="./favicon.ico" />
+    
+    <style>
+      /* 小さなアニメーション */
+      .fade-in { animation: fade-in 0.6s ease-out both; }
+      @keyframes fade-in { from{opacity:0; transform: translateY(4px);} to{opacity:1; transform: translateY(0);} }
+      .shine { position: relative; overflow: hidden; }
+      .shine::after { content: ""; position: absolute; top:0; left:-100%; width: 50%; height:100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,.4), transparent); transform: skewX(-20deg); }
+      .shine:hover::after { animation: shine 0.8s; }
+      @keyframes shine { 100% { left: 150%; } }
+    </style>
+  </head>
+  <body class="bg-neutral-50 text-neutral-900">
+    <header class="max-w-5xl mx-auto px-4 pt-10 pb-4">
+      <nav class="flex items-center justify-between">
+        <a href="#top" class="font-semibold tracking-tight text-lg">Ryo Tanaka</a>
+        <div class="hidden sm:flex gap-6 text-sm text-neutral-600">
+          <a href="#brands" class="hover:text-neutral-900">Brands</a>
+          <a href="#about" class="hover:text-neutral-900">About</a>
+          <a href="#contact" class="hover:text-neutral-900">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="top" class="max-w-5xl mx-auto px-4 pt-8 pb-12">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="fade-in">
+          <h1 class="text-3xl md:text-4xl font-bold leading-tight">清邁米粉湯・台日混混・個人SNS<br class="hidden md:block"/> 公式リンク</h1>
+          <p class="mt-4 text-neutral-700">飲食 × データ × コンテンツ。田中 良（Ryo Tanaka）の活動を1ページに集約しました。下のカードから各プロジェクトへどうぞ。</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#brands" class="shine inline-flex items-center gap-2 rounded-2xl bg-primary px-4 py-2 text-white font-medium shadow hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">リンクを見る</a>
+            <a href="#about" class="inline-flex items-center gap-2 rounded-2xl border px-4 py-2 font-medium hover:bg-white/60">プロフィール</a>
+          </div>
+        </div>
+        <div class="fade-in md:justify-self-end">
+          <div class="aspect-[4/3] w-full max-w-md rounded-2xl bg-gradient-to-br from-green-100 to-emerald-200 border shadow-inner grid place-items-center">
+            <span class="text-6xl">🍜</span>
+          </div>
+          <p class="mt-2 text-xs text-neutral-500">※ 画像は <code>og-image.jpg</code> に差し替え可能</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brands / Links -->
+    <section id="brands" class="max-w-5xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold">Brands & Channels</h2>
+      <p class="mt-2 text-neutral-700">各カードのリンクをあなたの公式URLに差し替えてご利用ください。</p>
+
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 清邁米粉湯 -->
+        <article class="rounded-2xl border bg-white shadow-sm hover:shadow-md transition p-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl grid place-items-center bg-emerald-100">🥣</div>
+            <div>
+              <h3 class="font-semibold">清邁米粉湯</h3>
+              <p class="text-sm text-neutral-600">Central Kitchen + Storefront</p>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-col gap-2 text-sm">
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://instagram.com/REPLACE_chiangmai_noodle" target="_blank" rel="noopener">Instagram</a>
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://maps.app.goo.gl/REPLACE" target="_blank" rel="noopener">Google Maps</a>
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://REPLACE-site.example" target="_blank" rel="noopener">Official Site</a>
+          </div>
+        </article>
+
+        <!-- 台日混混 -->
+        <article class="rounded-2xl border bg-white shadow-sm hover:shadow-md transition p-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl grid place-items-center bg-amber-100">🎙️</div>
+            <div>
+              <h3 class="font-semibold">台日混混</h3>
+              <p class="text-sm text-neutral-600">Podcast / Community</p>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-col gap-2 text-sm">
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://instagram.com/REPLACE_taini_mix" target="_blank" rel="noopener">Instagram</a>
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://podcasts.apple.com/REPLACE" target="_blank" rel="noopener">Apple Podcasts</a>
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://open.spotify.com/show/REPLACE" target="_blank" rel="noopener">Spotify</a>
+          </div>
+        </article>
+
+        <!-- 個人 -->
+        <article class="rounded-2xl border bg-white shadow-sm hover:shadow-md transition p-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl grid place-items-center bg-sky-100">🧑‍💻</div>
+            <div>
+              <h3 class="font-semibold">田中 良（Ryo Tanaka）</h3>
+              <p class="text-sm text-neutral-600">Entrepreneur / Data Analyst</p>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-col gap-2 text-sm">
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://instagram.com/REPLACE_ryo_personal" target="_blank" rel="noopener">Instagram</a>
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="https://x.com/REPLACE_ryo" target="_blank" rel="noopener">X (Twitter)</a>
+            <a class="shine rounded-xl border px-3 py-2 hover:bg-neutral-50" href="mailto:hello@your-domain.tld" target="_blank" rel="noopener">Email</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-10 rounded-2xl border bg-gradient-to-br from-neutral-50 to-white p-6">
+        <h3 class="font-semibold">PR・コラボのご相談</h3>
+        <p class="mt-1 text-sm text-neutral-700">コンサル・出店イベント・スポンサー等のご相談は以下から。</p>
+        <div class="mt-3 flex flex-wrap gap-3 text-sm">
+          <a class="shine rounded-xl border px-4 py-2 hover:bg-neutral-50" href="mailto:biz@your-domain.tld">メールで相談</a>
+          <a class="shine rounded-xl border px-4 py-2 hover:bg-neutral-50" href="https://cal.com/REPLACE-username/30min" target="_blank" rel="noopener">30分ミーティング予約</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="max-w-5xl mx-auto px-4 py-12">
+      <h2 class="text-2xl font-bold">About</h2>
+      <div class="mt-4 grid md:grid-cols-3 gap-6 items-start">
+        <div class="md:col-span-2 text-neutral-800 leading-7">
+          <p>台湾・台中を拠点に、<strong>清邁米粉湯</strong>の運営、<strong>台日混混</strong>の番組制作、個人としてデータ分析・マーケ支援を行っています。中央キッチン×店舗モデル、SNS運用、データ可視化が得意分野。</p>
+          <ul class="mt-3 list-disc pl-5 text-neutral-700 text-sm">
+            <li>言語：日本語 / 台湾華語 / 英語（TOEIC 850）</li>
+            <li>スキル：Python, R, SQL, BI, Geo分析, Instagram運用, Podcast制作</li>
+            <li>目標：ブランドの多拠点展開とコミュニティ拡大</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border bg-white p-4 shadow-sm text-sm">
+          <h3 class="font-semibold">最新ニュース</h3>
+          <ul class="mt-2 space-y-1 text-neutral-700">
+            <li>・高雄イベント出展レポート公開（<a class="underline" href="#" target="_blank" rel="noopener">記事</a>）</li>
+            <li>・Podcast 新エピソード公開（<a class="underline" href="#" target="_blank" rel="noopener">台日混混</a>）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="max-w-5xl mx-auto px-4 pb-16">
+      <h2 class="text-2xl font-bold">Contact</h2>
+      <p class="mt-2 text-neutral-700">お仕事のご相談やメディア取材はメールにてご連絡ください。</p>
+      <div class="mt-4">
+        <a class="shine inline-flex items-center gap-2 rounded-2xl border px-4 py-2 font-medium hover:bg-neutral-50" href="mailto:hello@your-domain.tld">hello@your-domain.tld</a>
+      </div>
+      <p class="mt-6 text-xs text-neutral-500">© <span id="y"></span> Ryo Tanaka. All rights reserved.</p>
+    </section>
+
+    <script>
+      // 今年を自動でセット
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
