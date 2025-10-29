@@ -26,26 +26,7 @@ body {
   min-height: 100vh;
 }
 
-.loading-screen {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--bg);
-  color: var(--green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  animation: flicker 0.8s infinite;
-  z-index: 100;
-}
-@keyframes flicker {
-  0%, 50% { opacity: 1; }
-  50.1%, 100% { opacity: 0.5; }
-}
-
+/* ========== Terminal Frame ========== */
 .terminal {
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -75,6 +56,7 @@ body {
 
 .terminal-body { padding: 14px 16px 18px; }
 
+/* ========== Lines ========== */
 .command-line {
   color: var(--gray);
   font-weight: 600;
@@ -97,7 +79,7 @@ body {
 }
 
 .line {
-  margin-bottom: 18px;
+  margin-bottom: 26px;
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.8s ease;
@@ -107,29 +89,38 @@ body {
   transform: translateY(0);
 }
 
+/* ========== Text Styles ========== */
 .headline {
   color: var(--green);
   font-weight: 600;
   font-size: 15px;
 }
+
 .role-line {
   color: var(--text);
   font-weight: 600;
   font-size: 14px;
   margin-left: 20px;
   margin-top: 6px;
+  line-height: 1.5;
 }
+.role-line + .role-line { margin-top: 4px; }
+.role-line + .subtext { margin-top: 12px; }
+
 .subtext {
   color: var(--gray);
   margin-left: 20px;
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.7;
+  margin-bottom: 8px;
 }
+
+/* ========== Icons ========== */
 .icons {
   display: flex;
   gap: 10px;
   margin-left: 20px;
-  margin-top: 8px;
+  margin-top: 10px;
   flex-wrap: wrap;
 }
 .icon-btn {
@@ -153,6 +144,7 @@ body {
   filter: invert(1);
 }
 
+/* ========== Footer ========== */
 footer {
   color: var(--gray);
   font-size: 10px;
@@ -170,6 +162,27 @@ footer {
   transition: opacity 0.2s ease;
 }
 .reset:hover { opacity: 0.8; }
+
+/* ========== Loading ========== */
+.loading-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: flicker 0.8s infinite;
+  z-index: 100;
+}
+@keyframes flicker {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0.5; }
+}
 </style>
 </head>
 
@@ -186,6 +199,7 @@ footer {
   <div class="terminal-body">
     <div class="command-line" id="command"><span id="cursor" class="cursor"></span></div>
 
+    <!-- 自己紹介 -->
     <div class="line" id="line1">
       <div class="headline">&gt; Hello, World! I'm Ryo Tanaka!</div>
       <div class="role-line">&gt; ROLE: Data Analyst / CEO / Podcast Host</div>
@@ -210,6 +224,7 @@ footer {
       </div>
     </div>
 
+    <!-- 清邁米粉湯 -->
     <div class="line" id="line2">
       <div class="headline">&gt; 清邁米粉湯</div>
       <div class="role-line">&gt; ROLE: CEO</div>
@@ -227,6 +242,7 @@ footer {
       </div>
     </div>
 
+    <!-- 台日混混 -->
     <div class="line" id="line3">
       <div class="headline">&gt; 台日混混</div>
       <div class="role-line">&gt; ROLE: Podcast Host</div>
@@ -301,6 +317,7 @@ const startTerminal = () => {
   }
 };
 
+// 初回のみロード演出
 if (!localStorage.getItem('visited')) {
   setTimeout(() => {
     loading.textContent = 'INITIALIZING SYSTEM...';
@@ -311,9 +328,13 @@ if (!localStorage.getItem('visited')) {
   startTerminal();
 }
 
+// ✅ resetボタンでトップへスムーズスクロールしてからリロード
 document.getElementById('resetBtn').addEventListener('click', () => {
   localStorage.removeItem('visited');
-  location.reload();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => {
+    location.reload();
+  }, 600);
 });
 </script>
 </body>
