@@ -1,101 +1,320 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>田中 良 – Links</title>
-    <meta name="description" content="田中 良 (Ryo Tanaka) のリンクページ。清邁米粉湯・台日混混・個人SNS。" />
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ryo Tanaka Terminal</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1a1d23;
+  --border: #3a3f47;
+  --text: #d0d4da;
+  --gray: #9da3ad;
+  --green: #00ff99;
+}
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Code Pro', monospace;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    <style>
-      body { background-color: #111827; color: #e5e7eb; font-family: 'Poppins', sans-serif; }
-      .card { background-color: #1f2937; border-color: #374151; }
-      .icon-img { width: 28px; height: 28px; filter: invert(1); }
-      .brand-btn { opacity: 0.9; }
-      .brand-btn:hover { opacity: 1; transform: scale(1.05); transition: all 0.2s; }
-      .gradient-text { background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    </style>
-  </head>
-  <body>
-    <main class="max-w-xl mx-auto px-4 py-10 text-center">
-      <!-- プロフィール写真（円形） -->
-      <div class="mx-auto mb-8 w-40 h-40 rounded-full overflow-hidden shadow-lg border-4 border-gray-600">
-        <img src="images/profile.jpg" alt="プロフィール写真" class="object-cover w-full h-full" />
+.loading-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: flicker 0.8s infinite;
+  z-index: 100;
+}
+@keyframes flicker {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0.5; }
+}
+
+.terminal {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  background: #20232a;
+  box-shadow: 0 0 18px rgba(0, 255, 153, 0.08);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.terminal.visible { opacity: 1; }
+
+.terminal-header {
+  background: #2a2f38;
+  border-bottom: 1px solid var(--border);
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  gap: 8px;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.terminal-body { padding: 14px 16px 18px; }
+
+.command-line {
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 15px;
+  white-space: pre;
+  margin-bottom: 24px;
+}
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: var(--gray);
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  vertical-align: bottom;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0; }
+}
+
+.line {
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.8s ease;
+}
+.line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.headline {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 15px;
+}
+.role-line {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: 6px;
+}
+.subtext {
+  color: var(--gray);
+  margin-left: 20px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.icons {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.instagram { background: #E4405F; }
+.x { background: #000; }
+.note { background: #41c9b4; }
+.linkedin { background: #0A66C2; }
+.spotify { background: #1DB954; }
+.applepodcasts { background: #9933CC; }
+.googlemaps { background: #4285F4; }
+.icon-btn img {
+  width: 14px;
+  height: 14px;
+  filter: invert(1);
+}
+
+footer {
+  color: var(--gray);
+  font-size: 10px;
+  margin-top: 30px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.reset {
+  color: var(--green);
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+.reset:hover { opacity: 0.8; }
+</style>
+</head>
+
+<body>
+<div class="loading-screen" id="loading">LOADING SYSTEM...</div>
+
+<div class="terminal" id="terminal">
+  <div class="terminal-header">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+  </div>
+
+  <div class="terminal-body">
+    <div class="command-line" id="command"><span id="cursor" class="cursor"></span></div>
+
+    <div class="line" id="line1">
+      <div class="headline">&gt; Hello, World! I'm Ryo Tanaka!</div>
+      <div class="role-line">&gt; ROLE: Data Analyst / CEO / Podcast Host</div>
+      <div class="role-line">&gt; WHERE: Tokyo, Japan / Taichung, Taiwan</div>
+      <div class="subtext">
+        こんにちは、台湾台中でタイ料理屋を経営している田中良です！<br>
+        0800大家好、我是在台灣台中開泰式餐廳的日本人「田中良」！
       </div>
-
-      <h1 class="text-4xl font-extrabold tracking-wide gradient-text">田中 良</h1>
-      <p class="text-lg text-gray-400 mb-10 tracking-wider">Ryo Tanaka</p>
-
-      <div class="grid gap-6">
-        <!-- 清邁米粉湯 -->
-        <div class="card rounded-xl border shadow-sm hover:shadow-md transition p-4 text-left">
-          <h2 class="font-semibold text-lg flex items-center gap-2 mb-1">
-            <span>🥣</span>
-            清邁米粉湯
-          </h2>
-          <p class="text-sm text-gray-400 mb-2">CEO</p>
-          <div class="flex gap-3">
-            <a href="https://instagram.com/REPLACE_chiangmai_noodle" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#E4405F] p-2 flex items-center justify-center">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" class="icon-img" />
-            </a>
-          </div>
-        </div>
-
-        <!-- 台日混混 -->
-        <div class="card rounded-xl border shadow-sm hover:shadow-md transition p-4 text-left">
-          <h2 class="font-semibold text-lg flex items-center gap-2 mb-1">
-            <span>🎙️</span>
-            台日混混
-          </h2>
-          <p class="text-sm text-gray-400 mb-2">Host</p>
-          <div class="flex gap-3 flex-wrap">
-            <a href="https://instagram.com/REPLACE_taini_mix" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#E4405F] p-2 flex items-center justify-center min-w-[60px]">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" class="icon-img" />
-            </a>
-            <a href="https://open.spotify.com/show/REPLACE" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#1DB954] p-2 flex items-center justify-center min-w-[60px]">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg" alt="Spotify" class="icon-img" />
-            </a>
-            <a href="https://podcasts.apple.com/REPLACE" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#9933CC] p-2 flex items-center justify-center min-w-[60px]">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/applepodcasts.svg" alt="Apple Podcasts" class="icon-img" />
-            </a>
-            <a href="https://podcasts.google.com/REPLACE" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#4285F4] p-2 flex items-center justify-center min-w-[60px]">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlepodcasts.svg" alt="Google Podcasts" class="icon-img" />
-            </a>
-            <a href="https://music.amazon.co.jp/podcasts/REPLACE" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#FF9900] p-2 flex items-center justify-center min-w-[60px]">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/amazonmusic.svg" alt="Amazon Music" class="icon-img" />
-            </a>
-          </div>
-        </div>
-
-        <!-- 個人 -->
-        <div class="card rounded-xl border shadow-sm hover:shadow-md transition p-4 text-left">
-          <h2 class="font-semibold text-lg flex items-center gap-2 mb-1">
-            <span>🧑‍💻</span>
-            個人
-          </h2>
-          <div class="flex gap-3">
-            <a href="https://instagram.com/REPLACE_ryo_personal" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#E4405F] p-2 flex items-center justify-center">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" class="icon-img" />
-            </a>
-            <a href="https://x.com/REPLACE_ryo" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#000000] p-2 flex items-center justify-center">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X" class="icon-img" />
-            </a>
-            <a href="https://linkedin.com/in/REPLACE_ryo" target="_blank" class="flex-1 rounded-lg brand-btn bg-[#0A66C2] p-2 flex items-center justify-center">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="icon-img" />
-            </a>
-          </div>
-        </div>
+      <div class="icons">
+        <a href="https://www.instagram.com/ryotana20" target="_blank" class="icon-btn instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+        </a>
+        <a href="https://x.com/ryotana666" target="_blank" class="icon-btn x">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg">
+        </a>
+        <a href="https://note.com/ryotana666" target="_blank" class="icon-btn note">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/note.svg">
+        </a>
+        <a href="https://www.linkedin.com/in/ryo-tanaka-a7643a141" target="_blank" class="icon-btn linkedin">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg">
+        </a>
       </div>
+    </div>
 
-      <footer class="mt-10 text-sm text-gray-500">© <span id="y"></span> Ryo Tanaka</footer>
-    </main>
+    <div class="line" id="line2">
+      <div class="headline">&gt; 清邁米粉湯</div>
+      <div class="role-line">&gt; ROLE: CEO</div>
+      <div class="subtext">
+        タイ、チェンマイの米粉湯を台湾へお届けしています！<br>
+        從清邁帶回來的味道！
+      </div>
+      <div class="icons">
+        <a href="https://www.instagram.com/chiangmai.noodle" target="_blank" class="icon-btn instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+        </a>
+        <a href="https://maps.app.goo.gl/c9BEYMgq86PmUtks7?g_st=ipc" target="_blank" class="icon-btn googlemaps">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlemaps.svg">
+        </a>
+      </div>
+    </div>
 
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
-    </script>
-  </body>
+    <div class="line" id="line3">
+      <div class="headline">&gt; 台日混混</div>
+      <div class="role-line">&gt; ROLE: Podcast Host</div>
+      <div class="subtext">
+        日本人と台湾人が様々なトピックスについてゆるく語るバイリンガルPodcast！<br>
+        日本人和台湾人輕鬆聊各種話題的雙語Podcast！
+      </div>
+      <div class="icons">
+        <a href="https://www.instagram.com/tairifunfun" target="_blank" class="icon-btn instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+        </a>
+        <a href="https://podcasts.apple.com/jp/podcast/%E5%8F%B0%E6%97%A5%E6%B7%B7%E6%B7%B7/id1841561146" target="_blank" class="icon-btn applepodcasts">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/applepodcasts.svg">
+        </a>
+        <a href="https://open.spotify.com/show/0257zcRDPt7aYyQ7oaSNC6?si=tUlH4PUBRU2yQkrJ2u9KSQ" target="_blank" class="icon-btn spotify">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer">
+  © <span id="year"></span> RYO TANAKA<br>
+  <span class="reset" id="resetBtn">&gt; reset animation</span>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const loading = document.getElementById('loading');
+const terminal = document.getElementById('terminal');
+const footer = document.getElementById('footer');
+const cmdEl = document.getElementById('command');
+const cursor = document.getElementById('cursor');
+const cmd = '> run ryo_tanaka.exe';
+let i = 0;
+
+const showLinesSequential = () => {
+  document.querySelectorAll('.line').forEach((line, idx) => {
+    setTimeout(() => line.classList.add('visible'), idx * 1400);
+  });
+  footer.style.opacity = 1;
+};
+
+const showLinesInstant = () => {
+  document.querySelectorAll('.line').forEach(line => line.classList.add('visible'));
+  footer.style.opacity = 1;
+};
+
+const playTyping = () => {
+  if (i < cmd.length) {
+    cmdEl.insertBefore(document.createTextNode(cmd.charAt(i)), cursor);
+    i++;
+    setTimeout(playTyping, 60);
+  } else {
+    setTimeout(() => {
+      cursor.remove();
+      setTimeout(showLinesSequential, 700);
+    }, 800);
+    localStorage.setItem('visited', 'true');
+  }
+};
+
+const startTerminal = () => {
+  loading.style.display = 'none';
+  terminal.classList.add('visible');
+  if (localStorage.getItem('visited')) {
+    cmdEl.textContent = cmd;
+    showLinesInstant();
+  } else {
+    playTyping();
+  }
+};
+
+if (!localStorage.getItem('visited')) {
+  setTimeout(() => {
+    loading.textContent = 'INITIALIZING SYSTEM...';
+    setTimeout(startTerminal, 1200);
+  }, 800);
+} else {
+  loading.remove();
+  startTerminal();
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  localStorage.removeItem('visited');
+  location.reload();
+});
+</script>
+</body>
 </html>
