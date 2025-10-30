@@ -26,7 +26,27 @@ body {
   min-height: 100vh;
 }
 
-/* Terminal */
+.loading-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: flicker 0.8s infinite;
+  z-index: 100;
+}
+@keyframes flicker {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0.5; }
+}
+
 .terminal {
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -56,13 +76,12 @@ body {
 
 .terminal-body { padding: 14px 16px 18px; }
 
-/* Command Line */
 .command-line {
   color: var(--gray);
   font-weight: 600;
   font-size: 15px;
   white-space: pre;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 .cursor {
   display: inline-block;
@@ -81,7 +100,7 @@ body {
 .line {
   margin-bottom: 18px;
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
   transition: all 0.8s ease;
 }
 .line.visible {
@@ -89,47 +108,36 @@ body {
   transform: translateY(0);
 }
 
-/* Text Styling */
 .headline {
   color: var(--green);
   font-weight: 600;
   font-size: 15px;
-  margin-bottom: 6px;
 }
-
 .role-line {
   color: var(--text);
   font-weight: 600;
   font-size: 14px;
   margin-left: 20px;
-  margin-top: 3px; /* ✅ ROLE↔WHEREの行間を狭めた */
+  margin-top: 4px;
   line-height: 1.4;
 }
-
-/* ✅ 英語→日本語間の余白を追加 */
-.role-line:last-of-type {
-  margin-bottom: 14px;
-}
-
 .subtext {
   color: var(--gray);
   margin-left: 20px;
   font-size: 13px;
-  line-height: 1.7;
-  margin-bottom: 6px;
+  line-height: 1.6;
+  margin-top: 8px;
 }
-
-/* Icons */
 .icons {
   display: flex;
   gap: 10px;
   margin-left: 20px;
-  margin-top: 6px;
+  margin-top: 8px;
   flex-wrap: wrap;
 }
 .icon-btn {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 6px;
   display: flex;
   justify-content: center;
@@ -148,45 +156,23 @@ body {
   filter: invert(1);
 }
 
-/* Footer */
 footer {
   color: var(--gray);
   font-size: 10px;
-  margin-top: 18px;
+  margin-top: 30px;
   text-align: center;
   opacity: 0;
   transition: opacity 0.8s ease;
 }
 .reset {
   color: var(--green);
-  margin-top: 8px;
+  margin-top: 10px;
   cursor: pointer;
   font-size: 12px;
   text-decoration: underline;
   transition: opacity 0.2s ease;
 }
 .reset:hover { opacity: 0.8; }
-
-/* Loading Screen */
-.loading-screen {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--bg);
-  color: var(--green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  animation: flicker 0.8s infinite;
-  z-index: 100;
-}
-@keyframes flicker {
-  0%, 50% { opacity: 1; }
-  50.1%, 100% { opacity: 0.5; }
-}
 </style>
 </head>
 
@@ -203,14 +189,14 @@ footer {
   <div class="terminal-body">
     <div class="command-line" id="command"><span id="cursor" class="cursor"></span></div>
 
-    <!-- 自己紹介 -->
+    <!-- PROFILE -->
     <div class="line" id="line1">
-      <div class="headline">&gt; Hello, World! I'm Ryo Tanaka!</div>
+      <div class="headline">&gt; Hello, World! I'm Ryo Tanaka (田中良)</div>
       <div class="role-line">&gt; ROLE: Data Analyst / CEO / Podcast Host</div>
-      <div class="role-line">&gt; WHERE: Tokyo, Japan / Taichung, Taiwan</div>
+      <div class="role-line">&gt; BASE: Tokyo (JP) ⇄ Taichung (TW)</div>
       <div class="subtext">
-        こんにちは、台湾台中でタイ料理屋を経営している田中良です！<br>
-        0800大家好、我是在台灣台中開泰式餐廳的日本人「田中良」！
+        台湾台中でタイ料理店を経営する元データアナリストの日本人。<br>
+        曾是資料分析師，現在在台中經營泰式餐廳的日本人。
       </div>
       <div class="icons">
         <a href="https://www.instagram.com/ryotana20" target="_blank" class="icon-btn instagram">
@@ -231,6 +217,10 @@ footer {
     <!-- BUSINESS -->
     <div class="line" id="line2">
       <div class="headline">&gt; [BUSINESS] 清邁米粉湯</div>
+      <div class="subtext">
+        タイ、チェンマイの味を台湾へ。<br>
+        將清邁的味道帶到台灣。
+      </div>
       <div class="icons">
         <a href="https://www.instagram.com/chiangmai.noodle" target="_blank" class="icon-btn instagram">
           <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
@@ -244,6 +234,10 @@ footer {
     <!-- PODCAST -->
     <div class="line" id="line3">
       <div class="headline">&gt; [PODCAST] 台日混混</div>
+      <div class="subtext">
+        日本人と台湾人がゆるく語るバイリンガルPodcast。<br>
+        日本人跟台湾人輕鬆對話的雙語Podcast。
+      </div>
       <div class="icons">
         <a href="https://www.instagram.com/tairifunfun" target="_blank" class="icon-btn instagram">
           <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
@@ -276,7 +270,7 @@ let i = 0;
 
 const showLinesSequential = () => {
   document.querySelectorAll('.line').forEach((line, idx) => {
-    setTimeout(() => line.classList.add('visible'), idx * 1200);
+    setTimeout(() => line.classList.add('visible'), idx * 1400);
   });
   footer.style.opacity = 1;
 };
@@ -294,8 +288,8 @@ const playTyping = () => {
   } else {
     setTimeout(() => {
       cursor.remove();
-      setTimeout(showLinesSequential, 600);
-    }, 700);
+      setTimeout(showLinesSequential, 700);
+    }, 800);
     localStorage.setItem('visited', 'true');
   }
 };
@@ -311,6 +305,7 @@ const startTerminal = () => {
   }
 };
 
+// 初回のみロード演出
 if (!localStorage.getItem('visited')) {
   setTimeout(() => {
     loading.textContent = 'INITIALIZING SYSTEM...';
@@ -321,7 +316,7 @@ if (!localStorage.getItem('visited')) {
   startTerminal();
 }
 
-// Reset animation + scroll top
+// reset時：スクロール→再ロード
 document.getElementById('resetBtn').addEventListener('click', () => {
   localStorage.removeItem('visited');
   window.scrollTo({ top: 0, behavior: 'smooth' });
