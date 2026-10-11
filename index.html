@@ -3,435 +3,333 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ryo Tanaka｜台湾で店を持つデータアナリスト</title>
-<meta name="description" content="台湾・台中で飲食店を経営しながら、データとAIで店舗改善・FDE・メディアに取り組む田中良（Ryo Tanaka）の公式プロフィール。">
-<meta property="og:title" content="Ryo Tanaka｜台湾で店を持つデータアナリスト">
-<meta property="og:description" content="台湾・台中で飲食店を経営しながら、データとAIで店舗改善・FDE・メディアに取り組む田中良の公式プロフィール。">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Ryo Tanaka Terminal</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #16191f;
-  --panel: #20242c;
-  --panel-2: #191d24;
-  --border: #353b46;
-  --text: #d8dce3;
-  --gray: #9299a5;
+  --bg: #1a1d23;
+  --border: #3a3f47;
+  --text: #d0d4da;
+  --gray: #9da3ad;
   --green: #00ff99;
-  --green-soft: rgba(0,255,153,.10);
-  --yellow: #ffbd2e;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at top right, rgba(0,255,153,.05), transparent 32rem),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
   font-family: 'Source Code Pro', monospace;
-  padding: 18px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
 }
-a { color: inherit; }
+
 .loading-screen {
-  position: fixed; inset: 0;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: var(--bg);
   color: var(--green);
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-size: 15px; font-weight: 700; letter-spacing: 1px;
-  animation: flicker .8s infinite;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: flicker 0.8s infinite;
   z-index: 100;
 }
-@keyframes flicker { 0%,50%{opacity:1} 50.1%,100%{opacity:.5} }
-.shell {
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
-  opacity: 0;
-  transition: opacity .35s ease;
+@keyframes flicker {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0.5; }
 }
-.shell.visible { opacity: 1; }
+
 .terminal {
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  background: #20232a;
+  box-shadow: 0 0 18px rgba(0, 255, 153, 0.08);
   overflow: hidden;
-  background: var(--panel);
-  box-shadow: 0 24px 80px rgba(0,0,0,.28), 0 0 24px rgba(0,255,153,.05);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
+.terminal.visible { opacity: 1; }
+
 .terminal-header {
   background: #2a2f38;
   border-bottom: 1px solid var(--border);
-  height: 34px;
-  display: flex; align-items: center;
-  padding: 0 13px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
   gap: 8px;
-  position: sticky; top: 0;
-  z-index: 10;
 }
-.dot { width: 11px; height: 11px; border-radius: 50%; }
-.dot.red { background:#ff5f56; }
-.dot.yellow { background:#ffbd2e; }
-.dot.green { background:#27c93f; }
-.window-title {
-  margin-left: 8px;
-  color: var(--gray);
-  font-size: 11px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.terminal-body { padding: 24px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.terminal-body { padding: 14px 16px 18px; }
+
 .command-line {
   color: var(--gray);
   font-weight: 600;
-  font-size: 14px;
-  white-space: pre-wrap;
-  margin-bottom: 22px;
+  font-size: 15px;
+  white-space: pre;
+  margin-bottom: 24px;
 }
 .cursor {
-  display:inline-block; width:8px; height:15px;
-  background:var(--gray); margin-left:2px;
-  animation:blink 1s infinite; vertical-align:bottom;
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: var(--gray);
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  vertical-align: bottom;
 }
-@keyframes blink { 0%,50%{opacity:1} 50.1%,100%{opacity:0} }
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0; }
+}
 
-.hero {
-  padding: 18px 0 30px;
-  border-bottom: 1px dashed var(--border);
+.line {
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.8s ease;
 }
-.eyebrow, .prompt {
+.line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.headline {
   color: var(--green);
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 15px;
 }
-.name {
-  margin: 9px 0 8px;
-  font-size: clamp(28px, 6vw, 54px);
-  line-height: 1.05;
-  letter-spacing: -2px;
-}
-.tagline {
-  font-size: clamp(16px, 2.5vw, 22px);
+.role-line {
   color: var(--text);
-  max-width: 780px;
-  line-height: 1.55;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: 4px;
+  line-height: 1.4;
 }
-.meta {
+.subtext {
   color: var(--gray);
-  margin-top: 15px;
-  line-height: 1.8;
+  margin-left: 20px;
   font-size: 13px;
+  line-height: 1.6;
+  margin-top: 8px;
 }
-.chips {
-  display:flex; flex-wrap:wrap; gap:8px;
-  margin-top:17px;
+.icons {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+  margin-top: 8px;
+  flex-wrap: wrap;
 }
-.chip {
-  border:1px solid rgba(0,255,153,.34);
-  background:var(--green-soft);
-  color:var(--green);
-  padding:7px 9px;
-  border-radius:999px;
-  font-size:11px;
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.actions {
-  display:flex; flex-wrap:wrap; gap:9px;
-  margin-top:21px;
+.instagram { background: #E4405F; }
+.x { background: #000; }
+.note { background: #41c9b4; }
+.linkedin { background: #0A66C2; }
+.youtube { background: #FF0000; }
+.spotify { background: #1DB954; }
+.applepodcasts { background: #9933CC; }
+.googlemaps { background: #4285F4; }
+.icon-btn img {
+  width: 14px;
+  height: 14px;
+  filter: invert(1);
 }
-.btn {
-  text-decoration:none;
-  border:1px solid var(--border);
-  padding:9px 12px;
-  border-radius:7px;
-  font-size:12px;
-  transition:.18s ease;
-  background:var(--panel-2);
-}
-.btn:hover { border-color:var(--green); color:var(--green); transform:translateY(-1px); }
-.btn.primary { background:var(--green); color:#07130d; border-color:var(--green); font-weight:700; }
-
-.section {
-  padding: 30px 0;
-  border-bottom:1px dashed var(--border);
-}
-.section:last-of-type { border-bottom:0; }
-.section-head {
-  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
-  margin-bottom:16px;
-}
-.section h2 {
-  margin:0;
-  font-size:18px;
-  color:var(--green);
-}
-.section-note { color:var(--gray); font-size:11px; }
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-.card {
-  background:var(--panel-2);
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:16px;
-  min-height:150px;
-}
-.card:hover { border-color:#4a5360; }
-.card .label {
-  color:var(--green);
-  font-size:11px;
-  font-weight:700;
-  margin-bottom:8px;
-}
-.card h3 {
-  margin:0 0 9px;
-  font-size:16px;
-}
-.card p {
-  color:var(--gray);
-  font-size:12px;
-  line-height:1.75;
-  margin:0;
-}
-.card .links {
-  display:flex; gap:10px; flex-wrap:wrap;
-  margin-top:14px;
-}
-.card .links a {
-  color:var(--text);
-  font-size:11px;
-  text-decoration:none;
-  border-bottom:1px solid var(--border);
-}
-.card .links a:hover { color:var(--green); border-color:var(--green); }
-
-.timeline { display:grid; gap:10px; }
-.project {
-  display:grid;
-  grid-template-columns:118px 1fr;
-  gap:14px;
-  padding:13px 0;
-  border-bottom:1px solid rgba(53,59,70,.6);
-}
-.project:last-child { border-bottom:0; }
-.status {
-  color:var(--yellow);
-  font-size:11px;
-  font-weight:700;
-}
-.project strong { font-size:13px; }
-.project p { margin:5px 0 0; color:var(--gray); font-size:12px; line-height:1.65; }
-
-.contact-box {
-  border:1px solid rgba(0,255,153,.35);
-  background:linear-gradient(135deg,rgba(0,255,153,.08),rgba(0,255,153,.02));
-  border-radius:9px;
-  padding:18px;
-}
-.contact-box p { color:var(--gray); line-height:1.7; font-size:12px; margin:8px 0 0; }
 
 footer {
-  color:var(--gray);
-  font-size:10px;
-  margin:24px 0 12px;
-  text-align:center;
+  color: var(--gray);
+  font-size: 10px;
+  margin-top: 30px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 .reset {
-  color:var(--green);
-  margin-top:8px;
-  cursor:pointer;
-  display:inline-block;
-  text-decoration:underline;
+  color: var(--green);
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
 }
-@media (max-width:700px) {
-  body{padding:10px;}
-  .terminal-body{padding:18px;}
-  .grid{grid-template-columns:1fr;}
-  .project{grid-template-columns:1fr;gap:5px;}
-  .name{letter-spacing:-1px;}
-}
-@media (prefers-reduced-motion: reduce) {
-  *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; }
-}
+.reset:hover { opacity: 0.8; }
 </style>
 </head>
+
 <body>
-<div class="loading-screen" id="loading">LOADING RYO_TANAKA...</div>
+<div class="loading-screen" id="loading">LOADING SYSTEM...</div>
 
-<main class="shell" id="shell">
-  <section class="terminal">
-    <div class="terminal-header">
-      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-      <span class="window-title">ryo@taichung: ~/personal-site</span>
+<div class="terminal" id="terminal">
+  <div class="terminal-header">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+  </div>
+
+  <div class="terminal-body">
+    <div class="command-line" id="command"><span id="cursor" class="cursor"></span></div>
+
+    <!-- PROFILE -->
+    <div class="line" id="line1">
+      <div class="headline">&gt; Hello, World!</div>
+      <div class="headline">&gt; I'm Ryo Tanaka (田中良)</div>
+      <div class="role-line">&gt; ROLE: CEO / Podcaster</div>
+      <div class="role-line">&gt; BASE: Tokyo (JP) ⇄ Taichung (TW)</div>
+      <div class="subtext">
+        台湾台中でタイ料理店を経営している日本人。<br>
+        元データアナリスト。<br>
+        我是住在台湾台中開泰式餐廳的日本人。<br>  
+        以前是數據分析師。
+      </div>
+      <div class="icons">
+        <a href="https://www.instagram.com/ryotana20" target="_blank" class="icon-btn instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+        </a>
+        <a href="https://x.com/ryotana666" target="_blank" class="icon-btn x">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg">
+        </a>
+        <a href="https://note.com/ryotana666" target="_blank" class="icon-btn note">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/note.svg">
+        </a>
+        <a href="https://www.linkedin.com/in/ryo-tanaka-a7643a141" target="_blank" class="icon-btn linkedin">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg">
+        </a>
+        <span class="icon-btn youtube" aria-label="YouTube" title="YouTube">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg">
+        </span>
+      </div>
     </div>
 
-    <div class="terminal-body">
-      <div class="command-line" id="command"><span id="cursor" class="cursor"></span></div>
-
-      <section class="hero">
-        <div class="eyebrow">&gt; whoami</div>
-        <h1 class="name">Ryo Tanaka<span style="color:var(--green)">.</span></h1>
-        <div class="tagline">台湾で店を持つデータアナリスト。<br>現場に飛び込み、データとAIで事業を前に進める。</div>
-        <div class="meta">
-          田中 良 / Japanese in Taichung, Taiwan<br>
-          Restaurant owner × FDE × Media<br>
-          「知って終わるな、やって知れ。」
-        </div>
-        <div class="chips">
-          <span class="chip">TAICHUNG</span>
-          <span class="chip">FOOD</span>
-          <span class="chip">DATA / AI</span>
-          <span class="chip">FDE</span>
-          <span class="chip">MEDIA</span>
-        </div>
-        <div class="actions">
-          <a class="btn primary" href="#work">view work</a>
-          <a class="btn" href="#projects">current projects</a>
-          <a class="btn" href="#contact">contact</a>
-        </div>
-      </section>
-
-      <section class="section" id="work">
-        <div class="section-head"><h2>&gt; ls ./work</h2><span class="section-note">FOOD / FDE / MEDIA</span></div>
-        <div class="grid">
-          <article class="card">
-            <div class="label">[FOOD]</div>
-            <h3>清邁米粉湯</h3>
-            <p>妻の家族が30年以上続けてきたタイ料理の背景を受け継ぎ、台中でチェンマイ米粉湯を経営。現場でオペレーション、原価、顧客体験を検証しています。</p>
-            <div class="links">
-              <a href="https://www.instagram.com/chiangmai.noodle" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-              <a href="https://maps.app.goo.gl/c9BEYMgq86PmUtks7?g_st=ipc" target="_blank" rel="noopener noreferrer">Google Maps ↗</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="label">[FDE / DATA & AI]</div>
-            <h3>店舗の現場から、仕組みまで。</h3>
-            <p>飲食・小規模店舗の現場に入り、POS、QSC、CRM、ダッシュボード、Web、AIをつないで改善。分析資料で終わらず、実装と運用まで持っていきます。</p>
-          </article>
-
-          <article class="card">
-            <div class="label">[MEDIA]</div>
-            <h3>台湾起業のリアル</h3>
-            <p>成功談ではなく、試行錯誤の途中を記録。YouTube、note、Instagram、Xを通じて、海外起業・店舗経営・AI活用の一次情報を発信します。</p>
-            <div class="links">
-              <a href="https://www.instagram.com/ryotana20" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-              <a href="https://x.com/ryotana666" target="_blank" rel="noopener noreferrer">X ↗</a>
-              <a href="https://note.com/ryotana666" target="_blank" rel="noopener noreferrer">note ↗</a>
-              <a href="https://www.linkedin.com/in/ryo-tanaka-a7643a141" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="label">[PODCAST]</div>
-            <h3>台日混混</h3>
-            <p>台中の良 × 東京の嘛傻。中文回と日本語回を交互に、台湾と日本の生活・言語・文化のリアルを話すPodcast。</p>
-            <div class="links">
-              <a href="https://www.instagram.com/tairifunfun" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-              <a href="https://podcasts.apple.com/jp/podcast/%E5%8F%B0%E6%97%A5%E6%B7%B7%E6%B7%B7/id1841561146" target="_blank" rel="noopener noreferrer">Apple Podcasts ↗</a>
-              <a href="https://open.spotify.com/show/0257zcRDPt7aYyQ7oaSNC6?si=tUlH4PUBRU2yQkrJ2u9KSQ" target="_blank" rel="noopener noreferrer">Spotify ↗</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="projects">
-        <div class="section-head"><h2>&gt; cat current_projects.log</h2><span class="section-note">NOW BUILDING</span></div>
-        <div class="timeline">
-          <div class="project">
-            <div class="status">RUNNING</div>
-            <div><strong>Restaurant Operations AI</strong><p>提供時間、QSC、POSなどの現場データから、飲食店のオペレーション改善を支援する仕組みを検証中。</p></div>
-          </div>
-          <div class="project">
-            <div class="status">BUILDING</div>
-            <div><strong>Taiwan Sign Game</strong><p>台湾の実在看板を使ったブラウザゲーム。看板を入口に、店舗と人がつながる仕組みを実験しています。</p></div>
-          </div>
-          <div class="project">
-            <div class="status">TESTING</div>
-            <div><strong>Taiwan Sweets in Japan</strong><p>台湾の素材・食文化を日本で小さく販売検証。設備投資より先に、商品と需要を現場で確かめます。</p></div>
-          </div>
-          <div class="project">
-            <div class="status">SHIPPING</div>
-            <div><strong>Content Engine</strong><p>飲食・FDE・開発で得た一次情報を、動画・Podcast・note・SNSへ変換する仕組みを運用しています。</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head"><h2>&gt; cat philosophy.txt</h2></div>
-        <div class="contact-box">
-          <div class="prompt">dive in.</div>
-          <p>知識だけでは何も変わらない。まず現場に入る。やってみる。失敗する。そこで得た情報を、次の意思決定につなげる。僕は、飛び込む人に「浮き輪」を渡せる人でありたい。</p>
-        </div>
-      </section>
-
-      <section class="section" id="contact">
-        <div class="section-head"><h2>&gt; ./connect</h2><span class="section-note">WORK / MEDIA / COLLAB</span></div>
-        <div class="contact-box">
-          <div class="prompt">Let's build something useful.</div>
-          <p>店舗改善、データ・AI活用、FDE、台湾での事業、メディア企画など。まずはSNSから気軽に連絡してください。</p>
-          <div class="actions">
-            <a class="btn primary" href="https://www.instagram.com/ryotana20" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a class="btn" href="https://x.com/ryotana666" target="_blank" rel="noopener noreferrer">X</a>
-            <a class="btn" href="https://www.linkedin.com/in/ryo-tanaka-a7643a141" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
-      </section>
+    <!-- BUSINESS -->
+    <div class="line" id="line2">
+      <div class="headline">&gt; [BUSINESS] 清邁米粉湯</div>
+      <div class="subtext">
+        タイ、チェンマイの味を台湾へ。<br>
+        將清邁的味道帶到台灣。
+      </div>
+      <div class="icons">
+        <a href="https://www.instagram.com/chiangmai.noodle" target="_blank" class="icon-btn instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+        </a>
+        <a href="https://maps.app.goo.gl/c9BEYMgq86PmUtks7?g_st=ipc" target="_blank" class="icon-btn googlemaps">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlemaps.svg">
+        </a>
+      </div>
     </div>
-  </section>
 
-  <footer>
-    © <span id="year"></span> RYO TANAKA · TAICHUNG, TAIWAN<br>
-    <span class="reset" id="resetBtn">&gt; reset terminal</span>
-  </footer>
-</main>
+    <!-- PODCAST -->
+    <div class="line" id="line3">
+      <div class="headline">&gt; [PODCAST] 台日混混</div>
+      <div class="subtext">
+        日本人と台湾人がゆるく語る日中Podcast。<br>
+        日本人跟台湾人輕鬆對話的雙語Podcast。
+      </div>
+      <div class="icons">
+        <a href="https://www.instagram.com/tairifunfun" target="_blank" class="icon-btn instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+        </a>
+        <a href="https://podcasts.apple.com/jp/podcast/%E5%8F%B0%E6%97%A5%E6%B7%B7%E6%B7%B7/id1841561146" target="_blank" class="icon-btn applepodcasts">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/applepodcasts.svg">
+        </a>
+        <a href="https://open.spotify.com/show/0257zcRDPt7aYyQ7oaSNC6?si=tUlH4PUBRU2yQkrJ2u9KSQ" target="_blank" class="icon-btn spotify">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer">
+  © <span id="year"></span> RYO TANAKA<br>
+  <span class="reset" id="resetBtn">&gt; reset animation</span>
+</footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 const loading = document.getElementById('loading');
-const shell = document.getElementById('shell');
+const terminal = document.getElementById('terminal');
+const footer = document.getElementById('footer');
 const cmdEl = document.getElementById('command');
 const cursor = document.getElementById('cursor');
-const cmd = '> ./ryo_tanaka --status=current';
+const cmd = '> run ryo_tanaka.exe';
 let i = 0;
 
-const reveal = () => {
-  loading.style.display = 'none';
-  shell.classList.add('visible');
+const showLinesSequential = () => {
+  document.querySelectorAll('.line').forEach((line, idx) => {
+    setTimeout(() => line.classList.add('visible'), idx * 1400);
+  });
+  footer.style.opacity = 1;
 };
 
-const type = () => {
+const showLinesInstant = () => {
+  document.querySelectorAll('.line').forEach(line => line.classList.add('visible'));
+  footer.style.opacity = 1;
+};
+
+const playTyping = () => {
   if (i < cmd.length) {
     cmdEl.insertBefore(document.createTextNode(cmd.charAt(i)), cursor);
     i++;
-    setTimeout(type, 40);
+    setTimeout(playTyping, 60);
   } else {
-    setTimeout(() => cursor.remove(), 500);
+    setTimeout(() => {
+      cursor.remove();
+      setTimeout(showLinesSequential, 700);
+    }, 800);
     localStorage.setItem('visited', 'true');
   }
 };
 
+const startTerminal = () => {
+  loading.style.display = 'none';
+  terminal.classList.add('visible');
+  if (localStorage.getItem('visited')) {
+    cmdEl.textContent = cmd;
+    showLinesInstant();
+  } else {
+    playTyping();
+  }
+};
+
+// 初回のみロード演出
 if (!localStorage.getItem('visited')) {
   setTimeout(() => {
-    loading.textContent = 'INITIALIZING CURRENT CONTEXT...';
-    setTimeout(() => {
-      reveal();
-      type();
-    }, 650);
-  }, 500);
+    loading.textContent = 'INITIALIZING SYSTEM...';
+    setTimeout(startTerminal, 1200);
+  }, 800);
 } else {
   loading.remove();
-  shell.classList.add('visible');
-  cmdEl.textContent = cmd;
+  startTerminal();
 }
 
+// reset時：スクロール→再ロード
 document.getElementById('resetBtn').addEventListener('click', () => {
   localStorage.removeItem('visited');
-  location.reload();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => {
+    location.reload();
+  }, 600);
 });
 </script>
 </body>
